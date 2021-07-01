@@ -5,7 +5,7 @@ import {ResultsPage} from "../pages/ResultsPage";
 let page
 let browser;
 beforeAll(async () => {
-    browser = await chromium.launch({headless: false});
+    browser = await chromium.launch({headless: true});
 });
 afterAll(async () => {
     await browser.close();
