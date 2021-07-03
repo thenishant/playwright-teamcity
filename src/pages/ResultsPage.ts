@@ -7,30 +7,20 @@ export class ResultsPage {
         this.page = page;
     }
 
-    private cheapestPrice = "data-test=tab-train-price"
-    private totalPrice = "data-test=cjs-price"
-    private searchedLocationFrom = "data-test=change-journey-header-origin"
-    private searchLocationTo = "data-test=change-journey-header-destination"
-    private continueButton = "button[title='Continue']"
+    private originCity = 'ul.left > li:nth-child(1) > h2:nth-child(1)'
+    private destinationCity = 'h2:nth-child(3)'
 
-    public async getCheapestPrice() {
-        await this.page.isVisible(this.cheapestPrice)
-        return this.page.innerText(this.cheapestPrice)
+    public async getSourceCity() {
+        await this.page.waitForSelector(this.originCity)
+        let currentDateData = await this.page.$$(this.originCity);
+        let completeCityName = await currentDateData[0].textContent().then(city => city.split(" "));
+        return completeCityName[0]
+        // return currentDateData[0].innerText()
     }
 
-    public async getTotalPrice() {
-        return this.page.innerText(this.totalPrice)
-    }
-
-    public async getOrigin() {
-        return this.page.innerText(this.searchedLocationFrom)
-    }
-
-    public async getDestination() {
-        return this.page.innerText(this.searchLocationTo)
-    }
-
-    public async continueJourney() {
-        await this.page.click(this.continueButton)
+    public async getDestinationCity() {
+        let currentDateData = await this.page.$$(this.destinationCity);
+        let completeCityName = await currentDateData[0].textContent().then(city => city.split(" "));
+        return completeCityName[0]
     }
 }

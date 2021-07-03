@@ -5,21 +5,22 @@ import {ResultsPage} from "../pages/ResultsPage";
 let page
 let browser;
 beforeAll(async () => {
-    browser = await chromium.launch({headless: true});
+    browser = await chromium.launch()
 });
 afterAll(async () => {
     await browser.close();
 });
 beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto("https://www.thetrainline.com/")
+    await page.goto("https://www.akbartravels.com/b2cplus/flight")
+    await page.waitForLoadState()
 });
 afterEach(async () => {
     await page.close();
 });
 describe('Search test', () => {
-    let origin = "London"
-    let destination = "Leeds"
+    let origin = "DEL"
+    let destination = "BOM"
 
     test(`should search ticket from ${origin} to ${destination}`, async () => {
         let homePage = new HomePage(page);
@@ -27,9 +28,7 @@ describe('Search test', () => {
 
         await homePage.searchTicket(origin, destination)
 
-        expect(await resultsPage.getCheapestPrice()).toStrictEqual(await resultsPage.getTotalPrice())
-        expect(await resultsPage.getOrigin()).toStrictEqual(origin)
-        expect(await resultsPage.getDestination()).toStrictEqual(destination)
-
+        expect(await resultsPage.getSourceCity()).toStrictEqual(origin)
+        expect(await resultsPage.getDestinationCity()).toStrictEqual(destination)
     });
 });
