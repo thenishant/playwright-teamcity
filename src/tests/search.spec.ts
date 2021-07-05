@@ -5,7 +5,7 @@ import {ResultsPage} from "../pages/ResultsPage";
 let page
 let browser;
 beforeAll(async () => {
-    browser = await chromium.launch()
+    browser = await chromium.launch({chromiumSandbox: false})
 });
 afterAll(async () => {
     await browser.close();
@@ -13,10 +13,10 @@ afterAll(async () => {
 beforeEach(async () => {
     page = await browser.newPage();
     await page.goto("https://www.akbartravels.com/b2cplus/flight")
-    await page.waitForLoadState()
 });
 afterEach(async () => {
     await page.close();
+
 });
 describe('Search test', () => {
     let origin = "DEL"
