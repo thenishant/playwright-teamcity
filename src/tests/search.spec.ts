@@ -5,7 +5,7 @@ import {ResultsPage} from "../pages/ResultsPage";
 let page
 let browser;
 beforeAll(async () => {
-    browser = await chromium.launch({chromiumSandbox: false})
+    browser = await chromium.launch({args: ['--no-sandbox']})
 });
 afterAll(async () => {
     await browser.close();
