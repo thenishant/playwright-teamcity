@@ -6,8 +6,16 @@ module.exports = {
         '^.+\\.ts$': 'ts-jest',
     },
     testPathIgnorePatterns: [".d.ts", ".js"],
-    reporters: [
+    "reporters": [
         "default",
+        [
+            "jest-html-reporters",
+            {
+                publicPath: "src/html-report/",
+                filename: "report.html",
+                expand: true
+            }
+        ]
     ],
     testMatch: ["**/__tests__/**/*.+(ts|js)", "**/?(*.)+(spec|test).+(ts|js)"],
 }
