@@ -8,7 +8,7 @@ const {addAttach} = require("jest-html-reporters/helper");
 let page
 let browser;
 beforeAll(async () => {
-    browser = await chromium.launch({headless: false, args: ['--no-sandbox']})
+    browser = await chromium.launch({headless: true, args: ['--no-sandbox']})
 });
 afterAll(async () => {
     await browser.close();
