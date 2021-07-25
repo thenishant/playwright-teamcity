@@ -24,7 +24,7 @@ afterEach(async () => {
 });
 describe('Search test', () => {
     let origin = "DEL"
-    let destination = "BOM1"
+    let destination = "BOM"
 
     test(`should search ticket from ${origin} to ${destination}`, async () => {
         let homePage = new HomePage(page);
